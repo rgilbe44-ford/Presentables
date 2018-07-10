@@ -28,12 +28,12 @@ extension UITableView: PresentableCollectionElement {
     
     public func bind(withPresentableManager manager: inout PresentableManager) {
         let m = manager
-        manager.bindableData.bind(listener: { (data) in
+        manager.bindableData.bind { [unowned m] (data) in
             for section: PresentableSection in m.data {
                 self.register(section: section)
             }
             self.safeReloadData()
-        })
+        }
         
         register(presentableSections: &manager.data)
         
